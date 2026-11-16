@@ -11,6 +11,7 @@ from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 import httpx
+from dotenv import load_dotenv
 
 from fieldsat.domain.errors import SourceUnavailableError
 from fieldsat.domain.evidence import SatelliteEvidence, SatellitePeriodEvidence
@@ -120,6 +121,8 @@ class CopernicusCredentials:
     def from_environment(
         cls, environment: Mapping[str, str] | None = None
     ) -> "CopernicusCredentials":
+        load_dotenv()
+        
         values = os.environ if environment is None else environment
         client_id = values.get("COPERNICUS_CLIENT_ID", "").strip()
         client_secret = values.get("COPERNICUS_CLIENT_SECRET", "").strip()

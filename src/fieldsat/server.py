@@ -10,6 +10,7 @@ from .domain.fields import (
     find_registered_field,
 )
 from .providers.base import SatelliteEvidenceProvider, WeatherEvidenceProvider
+from .tools import register_field_tools, register_weather_tools, register_satellite_tools
 
 
 INSTRUCTIONS = (
@@ -32,5 +33,7 @@ def create_server(
     )
 
     # Tools, resources and prompts are registered here from step 01 onwards.
-
+    register_field_tools(mcp, fields)
+    register_weather_tools(mcp, weather_provider, find_field)
+    register_satellite_tools(mcp, satellite_provider, find_field)
     return mcp

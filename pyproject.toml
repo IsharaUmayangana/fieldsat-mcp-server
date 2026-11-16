@@ -11,10 +11,12 @@ dependencies = [
     "fastmcp>=4.2.0",
     "httpx>=0.28.1",
     "pydantic>=2.14.3",
+    "python-dotenv>=1.2.4",
+    "tzdata>=2026.6",
 ]
 
 [project.scripts]
-live-demo = "fieldsat.cli:main"
+fieldsat = "fieldsat.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.12.22,<0.13.0"]
