@@ -11,6 +11,8 @@ from .domain.fields import (
 )
 from .providers.base import SatelliteEvidenceProvider, WeatherEvidenceProvider
 from .tools import register_field_tools, register_weather_tools, register_satellite_tools
+from .resources import register_resources
+from .promts import register_prompts
 
 
 INSTRUCTIONS = (
@@ -36,4 +38,6 @@ def create_server(
     register_field_tools(mcp, fields)
     register_weather_tools(mcp, weather_provider, find_field)
     register_satellite_tools(mcp, satellite_provider, find_field)
+    register_resources(mcp, fields, find_field)
+    register_prompts(mcp)
     return mcp
