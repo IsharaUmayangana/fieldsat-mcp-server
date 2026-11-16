@@ -15,6 +15,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "--transport",
+        choices=["stdio", "http", "sse"],
+        default="stdio",
+        help="stdio: the client starts this process. http: serve on a URL. sse: legacy HTTP",
+    )
+
+    parser.add_argument("--host", default="127.0.0.1", help="Address to listen on (http, sse)")
+    parser.add_argument("--port", type=int, default=8000, help="Port to listen on (http, sse)")
+
+    parser.add_argument(
         "--demo",
         action="store_true",
         default=os.environ.get("STEMLINK_MCP_DEMO") == "1",
@@ -41,7 +51,8 @@ def main(argv: list[str] | None = None) -> None:
         "demo fixtures" if args.demo else "live providers"
     )
 
-    mcp.run(
-        transport="stdio",
-        show_banner=False
-    )
+    if args.transport  == "stdio":
+        mcp.run(transport="stdio", show_banner=False)
+
+    else:
+        mcp.run(transport=args.transport, host=args.host, port=args.port)

@@ -12,7 +12,7 @@ from .domain.fields import (
 from .providers.base import SatelliteEvidenceProvider, WeatherEvidenceProvider
 from .tools import register_field_tools, register_weather_tools, register_satellite_tools
 from .resources import register_resources
-from .promts import register_prompts
+from .prompts import register_prompts
 
 
 INSTRUCTIONS = (
